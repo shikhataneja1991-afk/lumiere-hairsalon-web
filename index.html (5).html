@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière — Premium Hair Studio · Bengaluru</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF7F2;
+  --beige:#F0EAE0;
+  --beige2:#E8DDD0;
+  --gold:#C9A96E;
+  --gold-light:#E8D9BD;
+  --gold-dark:#A07A40;
+  --gold-glow:rgba(201,169,110,.18);
+  --warm-white:#FDFBF8;
+  --text-dark:#2C2416;
+  --text-mid:#6B5B45;
+  --text-light:#9C8C7A;
+  --dark:#1A110A;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--warm-white);color:var(--text-dark);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ─────────────────────────────────────────
+   FLOATING BUTTONS
+───────────────────────────────────────── */
+.float-btns{position:fixed;bottom:2rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;gap:.65rem;align-items:flex-end}
+.float-btn{display:flex;align-items:center;gap:.55rem;padding:.7rem 1.15rem;border-radius:50px;font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;box-shadow:0 4px 24px rgba(0,0,0,.18);transition:transform .22s,box-shadow .22s;white-space:nowrap}
+.float-btn:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.22)}
+.float-wa{background:#25D366;color:#fff}
+.float-call{background:var(--gold);color:#fff}
+.float-btn svg{width:17px;height:17px;flex-shrink:0}
+.float-pulse{animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 4px 24px rgba(37,211,102,.3)}50%{box-shadow:0 4px 36px rgba(37,211,102,.55)}}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1rem 5%;background:rgba(253,251,248,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,.12);transition:padding .3s,box-shadow .3s}
+nav.scrolled{padding:.65rem 5%;box-shadow:0 4px 32px rgba(44,36,22,.08)}
+.nav-logo{font-family:var(--serif);font-size:1.55rem;color:var(--text-dark);letter-spacing:.04em;flex-shrink:0}
+.nav-logo span{color:var(--gold);font-style:italic}
+.nav-center{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-center a{font-size:.68rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);transition:color .2s;position:relative;padding-bottom:2px}
+.nav-center a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-center a:hover{color:var(--gold)}
+.nav-center a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:.9rem}
+.nav-phone{font-size:.68rem;letter-spacing:.08em;color:var(--text-light);display:flex;align-items:center;gap:.4rem}
+.nav-phone svg{width:12px;height:12px;color:var(--gold)}
+.nav-cta{font-size:.68rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--gold);border:none;padding:.6rem 1.4rem;cursor:pointer;transition:background .25s,transform .2s;font-family:var(--sans);white-space:nowrap}
+.nav-cta:hover{background:var(--gold-dark);transform:translateY(-1px)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--text-dark);transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm-white);z-index:198;flex-direction:column;align-items:center;justify-content:center;gap:2.2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--serif);font-size:1.9rem;color:var(--text-dark);font-weight:300;letter-spacing:.03em}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;font-size:1.4rem;cursor:pointer;color:var(--text-mid);background:none;border:none;font-family:var(--sans)}
+.mobile-book-btn{margin-top:.5rem;background:var(--gold);color:#fff;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 2.4rem;border:none;cursor:pointer}
+
+/* ─────────────────────────────────────────
+   URGENCY BANNER
+───────────────────────────────────────── */
+.urgency-bar{background:var(--text-dark);color:var(--gold-light);text-align:center;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;padding:.6rem 5%;position:relative;top:0;z-index:199;display:flex;align-items:center;justify-content:center;gap:1rem}
+.urgency-bar::before,.urgency-bar::after{content:'';display:inline-block;width:28px;height:1px;background:var(--gold);opacity:.5}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:calc(72px + 36px)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5% 5% 5% 7%;position:relative}
+.hero-eyebrow{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:1.6rem;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';display:inline-block;width:28px;height:1px;background:var(--gold)}
+h1.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,4.2vw,4.6rem);font-weight:300;line-height:1.08;color:var(--text-dark);margin-bottom:1.4rem;letter-spacing:-.01em}
+h1.hero-title em{font-style:italic;color:var(--gold-dark)}
+.hero-sub{font-size:.93rem;color:var(--text-mid);max-width:390px;line-height:2;margin-bottom:1.2rem}
+.hero-urgency{font-size:.75rem;color:var(--gold-dark);font-style:italic;font-family:var(--serif);margin-bottom:2.2rem;letter-spacing:.01em;display:flex;align-items:center;gap:.5rem}
+.hero-urgency::before{content:'';width:18px;height:1px;background:var(--gold-dark);flex-shrink:0}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-gold{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:#fff;font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.2rem;border:1px solid var(--gold);transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.btn-gold::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .3s}
+.btn-gold:hover{background:var(--gold-dark);border-color:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(160,122,64,.3)}
+.btn-outline{display:inline-flex;align-items:center;gap:.6rem;color:var(--text-mid);font-family:var(--sans);font-size:.7rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;padding:1rem 1.8rem;border:1px solid rgba(108,91,69,.28);transition:all .3s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-trust{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,.2)}
+.hero-trust-item{text-align:center}
+.hero-trust-num{font-family:var(--serif);font-size:1.6rem;color:var(--gold-dark);font-weight:300;line-height:1}
+.hero-trust-label{font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--text-light);margin-top:.3rem}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;transform-origin:center;transition:transform 8s ease-out}
+.hero-right:hover img{transform:scale(1.04)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(253,251,248,.1) 0%,transparent 35%)}
+.hero-badge{position:absolute;bottom:2.5rem;left:-1.2rem;background:var(--warm-white);padding:1.1rem 1.5rem;border-left:3px solid var(--gold);box-shadow:4px 4px 20px rgba(44,36,22,.12)}
+.hero-badge-num{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--gold-dark);line-height:1}
+.hero-badge-text{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-top:.25rem}
+.hero-stars{position:absolute;top:2rem;right:2rem;background:rgba(253,251,248,.92);backdrop-filter:blur(10px);padding:.75rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.hero-star-num{font-family:var(--serif);font-size:1.25rem;color:var(--gold-dark);font-weight:300;line-height:1}
+.hero-star-icons{color:var(--gold);font-size:.65rem;letter-spacing:2px}
+.hero-star-label{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light)}
+
+/* ─────────────────────────────────────────
+   AWARD STRIP
+───────────────────────────────────────── */
+.award-strip{background:var(--text-dark);padding:1rem 7%;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.award-item{display:flex;align-items:center;gap:.65rem;color:rgba(253,251,248,.45);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.award-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+/* ─────────────────────────────────────────
+   TRUST BADGES ROW
+───────────────────────────────────────── */
+.trust-row{background:var(--beige);padding:2.8rem 7%;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.trust-badge{display:flex;flex-direction:column;align-items:center;padding:1rem 3rem;border-right:1px solid var(--beige2);gap:.35rem;text-align:center;flex:1;min-width:160px}
+.trust-badge:last-child{border-right:none}
+.trust-badge-num{font-family:var(--serif);font-size:2.2rem;color:var(--gold-dark);font-weight:300;line-height:1}
+.trust-badge-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light)}
+.trust-badge-icon{font-size:1.1rem;margin-bottom:.1rem}
+
+/* ─────────────────────────────────────────
+   SECTION COMMON
+───────────────────────────────────────── */
+section.sec{padding:6.5rem 7%}
+.sec-alt{background:var(--beige)}
+.sec-header{text-align:center;margin-bottom:4rem}
+.sec-tag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.9rem;font-weight:400}
+.sec-title{font-family:var(--serif);font-size:clamp(2rem,3vw,2.9rem);font-weight:300;color:var(--text-dark);line-height:1.18}
+.sec-title em{font-style:italic;color:var(--gold-dark)}
+.sec-line{width:40px;height:1px;background:var(--gold);margin:1.2rem auto 0}
+.sec-sub{font-size:.88rem;color:var(--text-light);max-width:480px;margin:.9rem auto 0;line-height:1.9}
+
+/* ─────────────────────────────────────────
+   SERVICES
+───────────────────────────────────────── */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.svc-card{background:var(--cream);overflow:hidden;position:relative;cursor:pointer;transition:background .3s}
+.svc-card:hover{background:#F5EEE4}
+.svc-img{height:210px;overflow:hidden}
+.svc-img img{transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.svc-card:hover .svc-img img{transform:scale(1.09)}
+.svc-body{padding:1.8rem 1.6rem 2rem}
+.svc-num{font-family:var(--serif);font-size:.82rem;color:var(--gold-light);margin-bottom:.5rem;font-style:italic}
+.svc-name{font-family:var(--serif);font-size:1.35rem;color:var(--text-dark);margin-bottom:.6rem;font-weight:300}
+.svc-desc{font-size:.82rem;color:var(--text-light);line-height:1.8;margin-bottom:1.2rem}
+.svc-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--beige2);padding-top:1rem}
+.svc-price{font-family:var(--serif);font-size:1.1rem;color:var(--gold-dark);font-style:italic}
+.svc-book-tag{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-light);padding:.3rem .7rem;transition:all .3s}
+.svc-card:hover .svc-book-tag{background:var(--gold);color:#fff;border-color:var(--gold)}
+
+/* ─────────────────────────────────────────
+   ABOUT
+───────────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-imgs{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:1fr 1fr;gap:8px;height:520px}
+.about-img-tall{grid-row:1/-1;overflow:hidden}
+.about-img-sm{overflow:hidden}
+.about-img-tall img,.about-img-sm img{transition:transform .6s}
+.about-img-tall:hover img,.about-img-sm:hover img{transform:scale(1.04)}
+.about-content .sec-header{text-align:left}
+.about-content .sec-line{margin:1.2rem 0 0}
+.about-body{font-size:.91rem;color:var(--text-mid);line-height:2;margin:1.6rem 0 .5rem}
+.about-pillars{display:flex;gap:1rem;margin:1.5rem 0 2rem;flex-wrap:wrap}
+.pillar{padding:.55rem 1.1rem;border:1px solid var(--gold-light);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark)}
+.about-sig{font-family:var(--serif);font-size:1.6rem;font-style:italic;color:var(--gold-dark);margin-top:.5rem}
+.about-role{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-light);margin-top:.2rem;margin-bottom:1.8rem}
+
+/* ─────────────────────────────────────────
+   PROCESS
+───────────────────────────────────────── */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.process-grid::before{content:'';position:absolute;top:2rem;left:12.5%;right:12.5%;height:1px;background:var(--gold-light)}
+.process-step{text-align:center;padding:0 1.5rem}
+.step-circle{width:64px;height:64px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;background:var(--warm-white);font-family:var(--serif);font-size:1.3rem;color:var(--gold-dark);font-weight:300;position:relative;z-index:1;transition:background .3s,color .3s}
+.process-step:hover .step-circle{background:var(--gold);color:#fff}
+.step-title{font-family:var(--serif);font-size:1.15rem;color:var(--text-dark);margin-bottom:.5rem}
+.step-desc{font-size:.81rem;color:var(--text-light);line-height:1.75}
+
+/* ─────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.testi-card{background:var(--cream);padding:2.4rem 2.2rem;position:relative;transition:transform .3s,box-shadow .3s}
+.testi-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(44,36,22,.08)}
+.testi-stars{color:var(--gold);font-size:.75rem;letter-spacing:3px;margin-bottom:1.2rem}
+.quote-icon{font-family:var(--serif);font-size:5rem;line-height:.4;color:var(--gold-light);display:block;margin-bottom:1.3rem}
+.testi-text{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--text-mid);line-height:1.9;margin-bottom:2rem}
+.testi-author{display:flex;align-items:center;gap:1rem;border-top:1px solid var(--beige2);padding-top:1.3rem}
+.testi-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--gold-light)}
+.author-name{font-weight:400;font-size:.87rem;color:var(--text-dark);letter-spacing:.03em}
+.author-label{font-size:.68rem;color:var(--text-light)}
+.testi-service{position:absolute;top:1.5rem;right:1.5rem;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-light);padding:.3rem .7rem}
+
+/* ─────────────────────────────────────────
+   GALLERY
+───────────────────────────────────────── */
+.gallery-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:260px 220px;gap:6px}
+.gi{overflow:hidden;cursor:pointer;position:relative}
+.gi::after{content:'';position:absolute;inset:0;background:rgba(44,36,22,0);transition:background .35s}
+.gi:hover::after{background:rgba(44,36,22,.16)}
+.gi img{transition:transform .65s cubic-bezier(.25,.46,.45,.94)}
+.gi:hover img{transform:scale(1.06)}
+.g1{grid-column:1/5;grid-row:1}.g2{grid-column:5/9;grid-row:1}.g3{grid-column:9/13;grid-row:1}
+.g4{grid-column:1/4;grid-row:2}.g5{grid-column:4/9;grid-row:2}.g6{grid-column:9/13;grid-row:2}
+.gallery-cta{text-align:center;margin-top:2.5rem}
+
+/* ─────────────────────────────────────────
+   PRICING BANNER
+───────────────────────────────────────── */
+.pricing-banner{background:var(--text-dark);padding:5rem 7%}
+.pricing-inner{display:grid;grid-template-columns:1fr 3fr;gap:4rem;align-items:center}
+.pricing-label{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--warm-white);line-height:1.2}
+.pricing-label em{font-style:italic;color:var(--gold)}
+.pricing-label p{font-size:.78rem;color:rgba(253,251,248,.35);font-family:var(--sans);margin-top:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:300}
+.pricing-items{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05)}
+.pricing-item{background:rgba(255,255,255,.03);padding:2rem 1.5rem;border-left:1px solid rgba(201,169,110,.12);transition:background .3s}
+.pricing-item:first-child{border-left:none}
+.pricing-item:hover{background:rgba(201,169,110,.06)}
+.p-service{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.5rem;opacity:.7}
+.p-name{font-family:var(--serif);font-size:1.1rem;color:var(--warm-white);margin-bottom:.4rem;font-weight:300}
+.p-price{font-family:var(--serif);font-size:1.5rem;color:var(--gold);font-style:italic;margin-bottom:.3rem}
+.p-note{font-size:.68rem;color:rgba(253,251,248,.25)}
+.pricing-cta{text-align:center;margin-top:3rem}
+.pricing-cta a{display:inline-flex;align-items:center;gap:.6rem;color:var(--gold-light);border:1px solid rgba(201,169,110,.3);font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:.85rem 2rem;transition:all .3s}
+.pricing-cta a:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ─────────────────────────────────────────
+   CONTACT / BOOKING
+───────────────────────────────────────── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.contact-left{background:var(--text-dark);padding:5rem 5%;display:flex;flex-direction:column;justify-content:center}
+.contact-left .sec-tag{color:var(--gold-light)}
+.contact-left .sec-title{color:var(--warm-white);text-align:left}
+.contact-left .sec-title em{color:var(--gold)}
+.contact-left .sec-line{margin:1.2rem 0 0;background:var(--gold)}
+.contact-urgency{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--gold);margin:1.8rem 0;padding:.9rem 1.1rem;border-left:2px solid var(--gold);background:rgba(201,169,110,.07)}
+.contact-body{color:rgba(253,251,248,.45);font-size:.86rem;line-height:1.95;margin-bottom:2rem}
+.contact-list{list-style:none;margin-bottom:2.5rem}
+.contact-list li{display:flex;align-items:flex-start;gap:1rem;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.86rem}
+.contact-list li:first-child{border-top:1px solid rgba(255,255,255,.05)}
+.ci-icon{width:36px;height:36px;border:1px solid rgba(201,169,110,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci-icon svg{width:14px;height:14px;color:var(--gold)}
+.ci-label{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.15rem}
+.ci-val{color:rgba(253,251,248,.6);font-size:.84rem}
+.contact-hours-note{font-size:.72rem;color:rgba(253,251,248,.28);margin-top:.2rem;font-style:italic}
+.contact-social{display:flex;gap:.8rem;margin-top:.5rem}
+.social-btn{width:38px;height:38px;border:1px solid rgba(201,169,110,.22);display:flex;align-items:center;justify-content:center;color:rgba(253,251,248,.35);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;font-family:var(--sans)}
+.social-btn:hover{border-color:var(--gold);color:var(--gold)}
+.contact-right{background:var(--beige);padding:5rem 5%}
+.contact-right h3{font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--text-dark);margin-bottom:.4rem}
+.contact-right > p{font-size:.83rem;color:var(--text-light);margin-bottom:2rem;line-height:1.8}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-mid);margin-bottom:.45rem;font-weight:400}
+.fg input,.fg select,.fg textarea{width:100%;background:#fff;border:1px solid rgba(201,169,110,.22);color:var(--text-dark);font-family:var(--sans);font-size:.88rem;font-weight:300;padding:.9rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;border-radius:0}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.1)}
+.fg textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-submit{width:100%;background:var(--gold);color:#fff;border:none;font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;padding:1.1rem;cursor:pointer;transition:all .28s;margin-top:.5rem}
+.form-submit:hover{background:var(--gold-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(160,122,64,.25)}
+.form-note{font-size:.7rem;color:var(--text-light);text-align:center;margin-top:.8rem;line-height:1.6}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer{background:#171009;padding:3.5rem 7% 2rem}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.footer-brand p{font-size:.8rem;color:rgba(253,251,248,.28);line-height:1.85;max-width:240px;margin-top:1rem}
+.footer-logo{font-family:var(--serif);font-size:1.5rem;color:rgba(253,251,248,.35);letter-spacing:.04em;display:inline-block}
+.footer-logo span{color:var(--gold);font-style:italic}
+.footer-col h4{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:400}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.6rem}
+.footer-col ul li a{font-size:.8rem;color:rgba(253,251,248,.28);transition:color .2s}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.7rem;color:rgba(253,251,248,.18)}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{font-size:.7rem;color:rgba(253,251,248,.18);transition:color .2s}
+.footer-legal a:hover{color:var(--gold)}
+
+/* ─────────────────────────────────────────
+   MOBILE RESPONSIVE
+───────────────────────────────────────── */
+@media(max-width:1024px){
+  .nav-center{gap:1.4rem}
+  .nav-phone{display:none}
+}
+@media(max-width:900px){
+  .nav-center{display:none}
+  .nav-hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:3.5rem 6% 2.5rem}
+  .hero-right{height:65vw;min-height:300px}
+  .hero-badge{display:none}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .about-imgs{height:340px}
+  .process-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .process-grid::before{display:none}
+  .testi-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(6,1fr);grid-template-rows:180px 180px 180px}
+  .g1{grid-column:1/4;grid-row:1}.g2{grid-column:4/7;grid-row:1}
+  .g3{grid-column:1/3;grid-row:2}.g4{grid-column:3/5;grid-row:2}.g5{grid-column:5/7;grid-row:2}
+  .g6{grid-column:1/7;grid-row:3}
+  .pricing-inner{grid-template-columns:1fr}
+  .pricing-items{grid-template-columns:1fr 1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .trust-badge{min-width:130px;padding:.8rem 1.5rem}
+}
+@media(max-width:600px){
+  section.sec{padding:4.5rem 5%}
+  .services-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .float-btn span{display:none}
+  .float-btn{padding:.8rem}
+  .hero-trust{gap:1.2rem}
+  .trust-row{flex-direction:column;gap:0}
+  .trust-badge{border-right:none;border-bottom:1px solid var(--beige2);width:100%;padding:.85rem 1.5rem}
+  .trust-badge:last-child{border-bottom:none}
+  .award-strip{gap:1.2rem;flex-direction:column}
+  .urgency-bar::before,.urgency-bar::after{display:none}
+  .pricing-items{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  Book your appointment today — experience premium hair care like never before
+</div>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns">
+  <a href="https://wa.me/919876543210?text=Hi%2C+I'd+like+to+book+an+appointment+at+Lumi%C3%A8re" class="float-btn float-wa float-pulse" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.549 4.107 1.508 5.84L.057 23.25a.75.75 0 00.916.928l5.56-1.457A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.951 0-3.772-.524-5.337-1.437l-.383-.225-3.297.865.878-3.21-.248-.395A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+  <a href="tel:+919876543210" class="float-btn float-call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+    <span>Call Now</span>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Lumi<span>ère</span></div>
+  <ul class="nav-center">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-phone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+      +91 98765 43210
+    </div>
+    <a href="#contact" class="nav-cta">Book Now</a>
+    <div class="nav-hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <button class="mobile-book-btn" onclick="toggleMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Bengaluru's Premier Hair Studio</div>
+    <h1 class="hero-title">Elevate your<br><em>natural beauty</em><br>with expert care</h1>
+    <p class="hero-sub">A sanctuary where luxury meets artistry. Expert stylists, premium products, and a deeply personalised experience — every single visit.</p>
+    <div class="hero-urgency">Limited slots available this week — book yours today</div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Appointment
+      </a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">500+</div>
+        <div class="hero-trust-label">Happy Clients</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">4.9★</div>
+        <div class="hero-trust-label">Google Rating</div>
+      </div>
+      <div class="hero-trust-item">
+        <div class="hero-trust-num">8+</div>
+        <div class="hero-trust-label">Years of Craft</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=1200&q=90&auto=format&fit=crop" alt="Lumière Hair Studio">
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-num">500+</div>
+      <div class="hero-badge-text">Transformations &amp; counting</div>
+    </div>
+    <div class="hero-stars">
+      <div class="hero-star-num">4.9</div>
+      <div class="hero-star-icons">★★★★★</div>
+      <div class="hero-star-label">Google Reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARD STRIP -->
+<div class="award-strip">
+  <div class="award-item"><div class="award-dot"></div>Precision Cuts</div>
+  <div class="award-item"><div class="award-dot"></div>Balayage Specialists</div>
+  <div class="award-item"><div class="award-dot"></div>Keratin &amp; Olaplex Certified</div>
+  <div class="award-item"><div class="award-dot"></div>Premium Wella &amp; L'Oréal Products</div>
+  <div class="award-item"><div class="award-dot"></div>Personalised Consultations</div>
+</div>
+
+<!-- TRUST BADGES -->
+<div class="trust-row">
+  <div class="trust-badge">
+    <div class="trust-badge-icon">⭐</div>
+    <div class="trust-badge-num">4.9 / 5</div>
+    <div class="trust-badge-label">Rated on Google</div>
+  </div>
+  <div class="trust-badge">
+    <div class="trust-badge-icon">👥</div>
+    <div class="trust-badge-num">500+</div>
+    <div class="trust-badge-label">Happy Clients</div>
+  </div>
+  <div class="trust-badge">
+    <div class="trust-badge-icon">✂️</div>
+    <div class="trust-badge-num">8+</div>
+    <div class="trust-badge-label">Years of Expertise</div>
+  </div>
+  <div class="trust-badge">
+    <div class="trust-badge-icon">🏆</div>
+    <div class="trust-badge-num">Top Rated</div>
+    <div class="trust-badge-label">Salon in Bengaluru</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="sec-header">
+    <span class="sec-tag">What We Offer</span>
+    <h2 class="sec-title">Our signature <em>services</em></h2>
+    <div class="sec-line"></div>
+    <p class="sec-sub">Each service is designed to bring out the best version of you, with expert technique and premium products.</p>
+  </div>
+  <div class="services-grid">
+    <a href="#contact" class="svc-card">
+      <div class="svc-img"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=85&auto=format&fit=crop" alt="Precision Cut" loading="lazy"></div>
+      <div class="svc-body">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Precision Cut</div>
+        <p class="svc-desc">A tailored cut that works with your natural texture, face shape, and lifestyle. Includes consultation, wash, and blow-dry finish.</p>
+        <div class="svc-footer">
+          <div class="svc-price">from ₹2,500</div>
+          <div class="svc-book-tag">Book</div>
+        </div>
+      </div>
+    </a>
+    <a href="#contact" class="svc-card">
+      <div class="svc-img"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=600&q=85&auto=format&fit=crop" alt="Colour & Balayage" loading="lazy"></div>
+      <div class="svc-body">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Colour &amp; Balayage</div>
+        <p class="svc-desc">From rich global colours to sun-kissed balayage — we create natural, dimensional results that complement your skin tone beautifully.</p>
+        <div class="svc-footer">
+          <div class="svc-price">from ₹4,000</div>
+          <div class="svc-book-tag">Book</div>
+        </div>
+      </div>
+    </a>
+    <a href="#contact" class="svc-card">
+      <div class="svc-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=85&auto=format&fit=crop" alt="Blow Dry & Styling" loading="lazy"></div>
+      <div class="svc-body">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Blow Dry &amp; Styling</div>
+        <p class="svc-desc">Whether it's an everyday blowout or a statement occasion look, we craft styles that last — and leave you feeling extraordinary.</p>
+        <div class="svc-footer">
+          <div class="svc-price">from ₹1,800</div>
+          <div class="svc-book-tag">Book</div>
+        </div>
+      </div>
+    </a>
+    <a href="#contact" class="svc-card">
+      <div class="svc-img"><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=600&q=85&auto=format&fit=crop" alt="Hair Treatment" loading="lazy"></div>
+      <div class="svc-body">
+        <div class="svc-num">04</div>
+        <div class="svc-name">Hair Treatment</div>
+        <p class="svc-desc">Repair, restore, and transform with our Keratin smoothing, Olaplex bonding, and deep conditioning treatments. Your hair, reborn.</p>
+        <div class="svc-footer">
+          <div class="svc-price">from ₹2,000</div>
+          <div class="svc-book-tag">Book</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec sec-alt" id="about">
+  <div class="about-grid">
+    <div class="about-imgs">
+      <div class="about-img-tall"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700&q=85&auto=format&fit=crop" alt="Salon interior"></div>
+      <div class="about-img-sm"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=85&auto=format&fit=crop" alt="Styling detail"></div>
+      <div class="about-img-sm"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=500&q=85&auto=format&fit=crop" alt="Product detail"></div>
+    </div>
+    <div class="about-content">
+      <div class="sec-header">
+        <span class="sec-tag">Our Story</span>
+        <h2 class="sec-title">More than a salon —<br>a <em>sanctuary</em></h2>
+        <div class="sec-line"></div>
+      </div>
+      <p class="about-body">Lumière was born from a simple belief: every woman deserves to feel genuinely beautiful — not just styled. We created a space that feels as luxurious as the results we deliver, where expert care and real conversation come together.</p>
+      <p class="about-body" style="margin-top:-.8rem">Our team of trained stylists brings years of experience and an artist's eye to every appointment. From your first consultation to your final blow-dry, we are entirely focused on you.</p>
+      <div class="about-pillars">
+        <div class="pillar">Expert Stylists</div>
+        <div class="pillar">Premium Products</div>
+        <div class="pillar">Personalised Care</div>
+      </div>
+      <div class="about-sig">Meera Krishnaswamy</div>
+      <div class="about-role">Founder &amp; Creative Director, Lumière</div>
+      <a href="#contact" class="btn-gold" style="align-self:flex-start">Book a Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process">
+  <div class="sec-header">
+    <span class="sec-tag">Your Experience</span>
+    <h2 class="sec-title">A seamless journey from <em>hello to luminous</em></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-circle">01</div>
+      <div class="step-title">Book Online</div>
+      <p class="step-desc">Choose your service, preferred date, and time. Our team confirms your slot within 2 hours via WhatsApp.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">02</div>
+      <div class="step-title">Arrive &amp; Unwind</div>
+      <p class="step-desc">Be welcomed with a beverage of your choice and settle into our calm, beautifully curated studio space.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">03</div>
+      <div class="step-title">Bespoke Consultation</div>
+      <p class="step-desc">Your stylist listens carefully, analyses your hair, and creates a tailored plan — no templates, no shortcuts.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">04</div>
+      <div class="step-title">Leave Luminous</div>
+      <p class="step-desc">Walk out feeling like the best version of yourself — with a personalised aftercare guide to maintain your look.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec sec-alt" id="testimonials">
+  <div class="sec-header">
+    <span class="sec-tag">Client Love</span>
+    <h2 class="sec-title">What our <em>guests</em> say</h2>
+    <div class="sec-line"></div>
+    <p class="sec-sub">500+ happy clients and counting. Here's what a few of them have to say.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-service">Balayage</div>
+      <div class="testi-stars">★★★★★</div>
+      <span class="quote-icon">"</span>
+      <p class="testi-text">I have never felt so understood by a stylist. She listened, advised, and delivered something even more beautiful than I had imagined. I walked out a completely new woman.</p>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80&auto=format&fit=crop&crop=face" alt="Ananya Sharma"></div>
+        <div>
+          <div class="author-name">Ananya Sharma</div>
+          <div class="author-label">Guest since 2021 · Koramangala</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-service">Colour</div>
+      <div class="testi-stars">★★★★★</div>
+      <span class="quote-icon">"</span>
+      <p class="testi-text">The balayage is the best my hair has ever looked. The colour is so natural and dimensional — every single person asks me who did it. I always say: Lumière, always.</p>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80&auto=format&fit=crop&crop=face" alt="Priya Mehta"></div>
+        <div>
+          <div class="author-name">Priya Mehta</div>
+          <div class="author-label">Guest since 2022 · Indiranagar</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-service">Keratin</div>
+      <div class="testi-stars">★★★★★</div>
+      <span class="quote-icon">"</span>
+      <p class="testi-text">Such a calm, beautifully curated atmosphere with genuinely talented people. The keratin treatment completely transformed my hair. Worth every rupee — I wouldn't go anywhere else.</p>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80&auto=format&fit=crop&crop=face" alt="Sneha Iyer"></div>
+        <div>
+          <div class="author-name">Sneha Iyer</div>
+          <div class="author-label">Guest since 2020 · Whitefield</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec" id="gallery">
+  <div class="sec-header">
+    <span class="sec-tag">Our Portfolio</span>
+    <h2 class="sec-title">A glimpse of our <em>craft</em></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gi g1"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=700&q=85&auto=format&fit=crop" alt="Cut result" loading="lazy"></div>
+    <div class="gi g2"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=700&q=85&auto=format&fit=crop" alt="Balayage result" loading="lazy"></div>
+    <div class="gi g3"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=85&auto=format&fit=crop" alt="Styling session" loading="lazy"></div>
+    <div class="gi g4"><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=500&q=85&auto=format&fit=crop" alt="Hair treatment" loading="lazy"></div>
+    <div class="gi g5"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=85&auto=format&fit=crop" alt="Stylist detail" loading="lazy"></div>
+    <div class="gi g6"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&q=85&auto=format&fit=crop" alt="Salon interior" loading="lazy"></div>
+  </div>
+  <div class="gallery-cta">
+    <a href="https://www.instagram.com" target="_blank" class="btn-outline" style="display:inline-flex;gap:.55rem;align-items:center">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      View Full Portfolio on Instagram
+    </a>
+  </div>
+</section>
+
+<!-- PRICING BANNER -->
+<div class="pricing-banner" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-label">Transparent<br><em>Pricing.</em><br>No surprises.
+      <p>Starting from</p>
+    </div>
+    <div class="pricing-items">
+      <div class="pricing-item">
+        <div class="p-service">Cut</div>
+        <div class="p-name">Precision Cut</div>
+        <div class="p-price">₹2,500+</div>
+        <div class="p-note">Incl. consultation &amp; wash</div>
+      </div>
+      <div class="pricing-item">
+        <div class="p-service">Colour</div>
+        <div class="p-name">Balayage / Highlights</div>
+        <div class="p-price">₹5,500+</div>
+        <div class="p-note">Global colour from ₹4,000</div>
+      </div>
+      <div class="pricing-item">
+        <div class="p-service">Styling</div>
+        <div class="p-name">Blow Dry &amp; Finish</div>
+        <div class="p-price">₹1,800+</div>
+        <div class="p-note">Occasion styles from ₹3,000</div>
+      </div>
+      <div class="pricing-item">
+        <div class="p-service">Treatment</div>
+        <div class="p-name">Keratin / Olaplex</div>
+        <div class="p-price">₹3,500+</div>
+        <div class="p-note">Deep conditioning from ₹2,000</div>
+      </div>
+    </div>
+  </div>
+  <div class="pricing-cta">
+    <a href="#contact">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book Your Appointment Today
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT / BOOKING -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-left">
+    <span class="sec-tag">Book Your Visit</span>
+    <h2 class="sec-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,2.8vw,2.6rem);font-weight:300;line-height:1.18">Ready for your<br><em>transformation?</em></h2>
+    <div class="sec-line" style="margin:1.2rem 0 0;background:var(--gold)"></div>
+    <div class="contact-urgency">Book your appointment today and experience premium hair care like never before.</div>
+    <p class="contact-body">Fill the form, WhatsApp us directly, or simply walk in — we always make time for you.</p>
+    <ul class="contact-list">
+      <li>
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+        <div><span class="ci-label">Phone &amp; WhatsApp</span><span class="ci-val">+91 98765 43210</span></div>
+      </li>
+      <li>
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><span class="ci-label">Address</span><span class="ci-val">14 Lavelle Road, Bengaluru — 560001</span></div>
+      </li>
+      <li>
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div>
+          <span class="ci-label">Working Hours</span>
+          <span class="ci-val">Tuesday – Sunday · 10:00 am – 8:00 pm</span>
+          <span class="contact-hours-note">Closed on Mondays</span>
+        </div>
+      </li>
+      <li>
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><span class="ci-label">Email</span><span class="ci-val">hello@lumieresalon.in</span></div>
+      </li>
+    </ul>
+    <div class="contact-social">
+      <a href="#" class="social-btn">IG</a>
+      <a href="#" class="social-btn">FB</a>
+      <a href="#" class="social-btn">YT</a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <h3>Book an Appointment</h3>
+    <p>Fill in your details and we'll confirm via WhatsApp within 2 hours.</p>
+    <div class="form-row">
+      <div class="fg"><label>First Name</label><input type="text" placeholder="Ananya"></div>
+      <div class="fg"><label>Last Name</label><input type="text" placeholder="Sharma"></div>
+    </div>
+    <div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 98765 43210"></div>
+    <div class="fg">
+      <label>Service</label>
+      <select>
+        <option value="" disabled selected>Select a service</option>
+        <option>Precision Cut — from ₹2,500</option>
+        <option>Colour &amp; Balayage — from ₹4,000</option>
+        <option>Blow Dry &amp; Styling — from ₹1,800</option>
+        <option>Hair Treatment (Keratin / Olaplex) — from ₹2,000</option>
+        <option>Full Experience Package</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Preferred Date</label><input type="date"></div>
+      <div class="fg">
+        <label>Preferred Time</label>
+        <select>
+          <option value="" disabled selected>Select time</option>
+          <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option>
+          <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+          <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label>Hair Goals / Notes (optional)</label><textarea placeholder="Tell us about your hair goals or anything you'd like us to know…"></textarea></div>
+    <button class="form-submit" id="submitBtn">Confirm My Appointment →</button>
+    <p class="form-note">We'll WhatsApp you a confirmation within 2 hours. No payment required to book.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Lumi<span>ère</span></div>
+      <p>Bengaluru's most trusted premium hair studio. Where every strand tells a beautiful story.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Precision Cut</a></li>
+        <li><a href="#services">Colour &amp; Balayage</a></li>
+        <li><a href="#services">Blow Dry &amp; Styling</a></li>
+        <li><a href="#services">Hair Treatments</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><a href="mailto:hello@lumieresalon.in">hello@lumieresalon.in</a></li>
+        <li><a href="#">14 Lavelle Road, Bengaluru</a></li>
+        <li><a href="#contact">Book Appointment</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lumière Hair Studio · Bengaluru. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky nav
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile menu
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+// Form submission
+document.getElementById('submitBtn').addEventListener('click', function () {
+  const btn = this;
+  btn.textContent = 'Sending…';
+  btn.style.opacity = '.7';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '✓ Appointment Requested!';
+    btn.style.background = '#7A9E6E';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  }, 1400);
+});
+
+// Subtle hero image drift on scroll
+const heroRight = document.querySelector('.hero-right img');
+if (heroRight) {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    if (scrolled < window.innerHeight) {
+      heroRight.style.transform = `scale(1) translateY(${scrolled * 0.04}px)`;
+    }
+  }, { passive: true });
+}
+</script>
+</body>
+</html>
